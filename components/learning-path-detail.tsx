@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, Play, BookOpen, Clock, Users, Star, Trophy, CheckCircle, TrendingUp, FileText, Activity } from "lucide-react"
+import { ArrowLeft, Play, BookOpen, Clock, Users, Star, Trophy, CheckCircle, TrendingUp } from "lucide-react"
 import GoalVisualization from "@/components/goal-visualization"
 import CuratedContent from "@/components/curated-content"
 import GoogleTasksIntegration from "@/components/google-tasks-integration"
@@ -234,10 +234,60 @@ export default function LearningPathDetail({ path, onBack }: LearningPathDetailP
               <div className="lg:col-span-2">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Overview</CardTitle>
+                    <CardTitle>What You'll Learn</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">{path.overview}</p>
+                    <p className="text-gray-600 mb-4">{path.overview}</p>
+
+                    <h4 className="font-semibold mb-3">Skills You'll Master:</h4>
+                    <div className="grid md:grid-cols-2 gap-2 mb-6">
+                      {path.skills.map((skill: string) => (
+                        <div key={skill} className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-600" />
+                          <span className="text-sm">{skill}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <h4 className="font-semibold mb-3">Learning Modules:</h4>
+                    <div className="space-y-3">
+                      {modules.map((module, index) => (
+                        <div
+                          key={module.id}
+                          className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                        >
+                          <div
+                            className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                              module.completed ? "bg-green-600 text-white" : "bg-gray-300 text-gray-600"
+                            }`}
+                          >
+                            {module.completed ? <CheckCircle className="w-5 h-5" /> : index + 1}
+                          </div>
+                          <div className="flex-1">
+                            <h5 className="font-medium">{module.title}</h5>
+                            <p className="text-sm text-gray-600">{module.description}</p>
+                            <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
+                              <span>{module.lessons} lessons</span>
+                              <span>{module.duration}</span>
+                              <span>
+                                {module.completedResources}/{module.resources} resources
+                              </span>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="w-16 h-2 bg-gray-200 rounded-full mb-1">
+                              <div
+                                className="h-full bg-purple-600 rounded-full transition-all"
+                                style={{ width: `${(module.completedResources / module.resources) * 100}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-xs text-gray-500">
+                              {Math.round((module.completedResources / module.resources) * 100)}%
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               </div>

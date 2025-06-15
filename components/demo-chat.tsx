@@ -6,76 +6,41 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Send, Star, User, Brain, Settings } from "lucide-react"
-import { useUserStore } from "@/lib/user-store"
-import FineTuningPanel from "@/components/fine-tuning-panel"
+import { ArrowLeft, Send, Star, Sparkles } from "lucide-react"
 
-interface ChatInterfaceProps {
-  mentor: any
+interface DemoChatProps {
   onBack: () => void
-  onProfile: () => void
 }
 
-// Function to format markdown-style text to HTML
+const demoMentor = {
+  name: "Demo Mentor",
+  field: "General Guidance",
+  avatar: "/placeholder.svg?height=80&width=80",
+  description: "Experience our AI mentorship platform with this interactive demo",
+  rating: 4.9,
+}
+
+// Function to format AI responses
 const formatMessage = (text: string) => {
-  // Replace **bold** with <strong>
   let formatted = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-
-  // Replace *italic* with <em>
   formatted = formatted.replace(/\*(.*?)\*/g, "<em>$1</em>")
-
-  // Replace line breaks
   formatted = formatted.replace(/\n/g, "<br>")
-
-  // Replace numbered lists
   formatted = formatted.replace(/^(\d+)\.\s/gm, "<br><strong>$1.</strong> ")
-
-  // Replace bullet points
   formatted = formatted.replace(/^[-•]\s/gm, "<br>• ")
-
   return formatted
 }
 
-export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfaceProps) {
+export default function DemoChat({ onBack }: DemoChatProps) {
   const [messages, setMessages] = useState([
     {
       id: "1",
       role: "assistant",
-      content: `Hello! I'm ${mentor.name}. ${mentor.description} I'm here to share insights based on my experience and perspective. What would you like to explore today?`,
+      content:
+        "Welcome to the AI Mentor Platform demo! I'm here to show you how our mentorship system works. Ask me anything about personal growth, career advice, or life guidance. Try asking something like 'How can I build better habits?' or 'What's the key to success?'",
     },
   ])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [showFineTuning, setShowFineTuning] = useState(false)
-  const [fineTuningSettings, setFineTuningSettings] = useState({
-    tone: 50,
-    fun: 30,
-    seriousness: 70,
-    practicality: 80,
-    context: "",
-    goals: [],
-    learningStyle: "balanced",
-    communicationFrequency: "weekly",
-    feedbackStyle: "constructive",
-    industryFocus: "general",
-    meetingPreference: "flexible",
-    challengeLevel: 60,
-    empathy: 70,
-    directness: 60,
-    creativity: 50,
-    analyticalDepth: 70,
-    motivationalStyle: "encouraging",
-    timeCommitment: "moderate",
-    preferredTopics: [],
-    avoidTopics: [],
-    personalityMatch: "adaptive",
-    responseLength: "medium",
-    useExamples: true,
-    useMetaphors: false,
-    includeResources: true,
-    trackProgress: true,
-  })
-  const { addSession } = useUserStore()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -92,6 +57,7 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
     setIsLoading(true)
 
     try {
+      // Use the same API for demo but with a demo mentor context
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
@@ -99,8 +65,29 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
         },
         body: JSON.stringify({
           messages: [...messages, userMessage],
-          mentor: mentor,
-          fineTuningSettings: fineTuningSettings,
+          mentor: {
+            name: "Demo AI Assistant",
+            field: "Platform Demo & Life Guidance",
+            description:
+              "AI assistant demonstrating the Timeless Mentors platform capabilities while providing helpful life guidance",
+            background:
+              "Designed to showcase the platform features and help users understand how AI mentorship works, while also providing genuine wisdom and practical advice for personal growth",
+            mentalModels: [
+              "User Experience",
+              "Platform Features",
+              "AI Capabilities",
+              "Personal Growth",
+              "Practical Wisdom",
+            ],
+            communicationStyle:
+              "Friendly, informative, and helpful in explaining platform features while providing genuine mentorship",
+          },
+          fineTuningSettings: {
+            tone: 60,
+            fun: 70,
+            seriousness: 40,
+            practicality: 85,
+          },
         }),
       })
 
@@ -149,37 +136,18 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
           }
         }
       }
-
-      // Add session to user history
-      addSession({
-        mentorId: mentor.id,
-        mentorName: mentor.name,
-        sessionType: "Chat",
-        date: new Date().toISOString(),
-        duration: 15,
-        rating: 5,
-      })
     } catch (error) {
       console.error("Error:", error)
       const errorMessage = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment.",
+        content:
+          "I apologize, but I'm having trouble connecting right now. This demo shows how our AI mentors would respond to your questions with personalized guidance. In the full platform, you'd get real-time responses from mentors like Naval Ravikant, Steve Jobs, and other legendary figures!",
       }
       setMessages((prev) => [...prev, errorMessage])
     } finally {
       setIsLoading(false)
     }
-  }
-
-  if (showFineTuning) {
-    return (
-      <FineTuningPanel
-        settings={fineTuningSettings}
-        onSettingsChange={setFineTuningSettings}
-        onBack={() => setShowFineTuning(false)}
-      />
-    )
   }
 
   return (
@@ -190,63 +158,42 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="sm" onClick={onBack}>
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back
+              Back to Home
             </Button>
             <div className="flex items-center gap-3">
-              <img
-                src={mentor.avatar || "/placeholder.svg"}
-                alt={mentor.name}
-                className="w-10 h-10 rounded-full object-cover"
-              />
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
               <div>
-                <h1 className="font-semibold text-lg">{mentor.name}</h1>
+                <h1 className="font-semibold text-lg">{demoMentor.name}</h1>
                 <Badge variant="secondary" className="text-xs">
-                  {mentor.field}
+                  Interactive Demo
                 </Badge>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" onClick={() => setShowFineTuning(true)}>
-              <Settings className="w-4 h-4 mr-2" />
-              Fine-tune
-            </Button>
-            <Button variant="outline" size="sm" onClick={onProfile}>
-              <User className="w-4 h-4 mr-2" />
-              Profile
-            </Button>
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            <span>{demoMentor.rating}</span>
           </div>
         </div>
       </div>
 
-      {/* Mentor Info Panel */}
+      {/* Demo Notice */}
       <div className="bg-blue-50 border-b border-blue-200 px-4 py-3">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-start gap-4">
-            <Brain className="w-5 h-5 text-blue-600 mt-1" />
-            <div>
-              <p className="text-sm font-medium text-blue-900">Mental Models:</p>
-              <p className="text-sm text-blue-700">{mentor.mentalModels.join(" • ")}</p>
-              <p className="text-xs text-blue-600 mt-1">Communication: {mentor.communicationStyle}</p>
-            </div>
-          </div>
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-blue-700 text-sm">
+            🎯 <strong>Live Demo:</strong> This demo uses real AI responses to showcase our platform features and
+            capabilities. Try asking about habits, success, or personal growth!
+          </p>
         </div>
       </div>
 
       {/* Chat Area */}
       <div className="max-w-4xl mx-auto p-4">
-        <Card className="h-[calc(100vh-280px)] flex flex-col">
+        <Card className="h-[calc(100vh-250px)] flex flex-col">
           <CardHeader className="border-b">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-xl">Mentorship Session</CardTitle>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                <span>{mentor.rating}</span>
-                <Badge variant="outline" className="ml-2">
-                  Live AI Connection
-                </Badge>
-              </div>
-            </div>
+            <CardTitle className="text-xl">Demo Mentoring Session</CardTitle>
           </CardHeader>
 
           <CardContent className="flex-1 overflow-y-auto p-6">
@@ -255,10 +202,10 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
                 <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
                     className={`max-w-[80%] p-4 rounded-lg ${
-                      message.role === "user" ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-900"
+                      message.role === "user" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-900"
                     }`}
                   >
-                    <div
+                    <div 
                       className="whitespace-pre-wrap"
                       dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
                     />
@@ -269,7 +216,7 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="bg-gray-100 text-gray-900 p-4 rounded-lg">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-ms-center gap-2">
                       <div className="flex gap-1">
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                         <div
@@ -281,7 +228,7 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
                           style={{ animationDelay: "0.2s" }}
                         ></div>
                       </div>
-                      <span className="text-sm text-gray-500">{mentor.name} is thinking...</span>
+                      <span className="text-sm text-gray-500">Demo mentor is thinking...</span>
                     </div>
                   </div>
                 </div>
@@ -294,7 +241,7 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={`Share your thoughts with ${mentor.name}...`}
+                placeholder="Try asking: 'How can I build better habits?' or 'What's the key to success?'"
                 className="flex-1"
                 disabled={isLoading}
               />
@@ -303,7 +250,7 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
               </Button>
             </form>
             <p className="text-xs text-gray-500 mt-2 text-center">
-              Powered by Lyzr AI • Real-time responses from {mentor.name}
+              Powered by Lyzr AI • Real-time responses demonstrating our mentorship platform
             </p>
           </div>
         </Card>

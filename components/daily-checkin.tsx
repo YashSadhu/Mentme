@@ -24,14 +24,10 @@ const checkinQuestions = [
 // Function to format AI responses
 const formatMessage = (text: string) => {
   let formatted = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-  formatted = formatted.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, "<em>$1</em>")
+  formatted = formatted.replace(/\*(.*?)\*/g, "<em>$1</em>")
   formatted = formatted.replace(/\n/g, "<br>")
   formatted = formatted.replace(/^(\d+)\.\s/gm, "<br><strong>$1.</strong> ")
   formatted = formatted.replace(/^[-•]\s/gm, "<br>• ")
-  // Handle ### headers
-  formatted = formatted.replace(/^### (.*$)/gm, "<h3 class='text-lg font-semibold mt-4 mb-2'>$1</h3>")
-  formatted = formatted.replace(/^## (.*$)/gm, "<h2 class='text-xl font-bold mt-4 mb-2'>$1</h2>")
-  formatted = formatted.replace(/^# (.*$)/gm, "<h1 class='text-2xl font-bold mt-4 mb-2'>$1</h1>")
   return formatted
 }
 

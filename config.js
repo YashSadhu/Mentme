@@ -22,7 +22,7 @@ export const config = {
   // API Configuration
   API_URL: "https://agent-prod.studio.lyzr.ai/v3/inference/chat/",
   API_KEY: "sk-default-pFNnvq5oSDeZx345ky9zBJpfhLruHKsO",
-  AGENT_ID: "684e3fb9e5203d8a7b653447",
+  AGENT_ID: "682c2fbfc5f6c2756de27ee0",
   USER_ID: "newnewton09@gmail.com",
 
   // Agent Configuration

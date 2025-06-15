@@ -30,10 +30,6 @@ import JournalReflection from "@/components/journal-reflection"
 import { useUserStore } from "@/lib/user-store"
 import LearningPaths from "@/components/learning-paths"
 import DemoChat from "@/components/demo-chat"
-import AIMentor from './components/AIMentor'
-import QuarterlyReview from './components/QuarterlyReview'
-import DailyTaskManager from '@/components/daily-task-manager'
-import VisionReview from '@/components/vision-review'
 
 const mentorPersonas = [
   {
@@ -184,15 +180,13 @@ const interactionTypes = [
   },
 ]
 
-export default function Home() {
+export default function HomePage() {
   const [currentView, setCurrentView] = useState<string>("landing")
   const [selectedMentor, setSelectedMentor] = useState<any>(null)
   const [selectedInteraction, setSelectedInteraction] = useState<string>("")
   const [searchTerm, setSearchTerm] = useState("")
   const [mounted, setMounted] = useState(false)
   const { user, isAuthenticated } = useUserStore()
-  const [showVisionReview, setShowVisionReview] = useState(false)
-  const [showMentorDashboard, setShowMentorDashboard] = useState(false)
 
   // Fix hydration mismatch by only rendering after mount
   useEffect(() => {
@@ -306,25 +300,6 @@ export default function Home() {
     return <DemoChat onBack={() => setCurrentView("landing")} />
   }
 
-  if (showMentorDashboard) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-7xl mx-auto p-6">
-          <div className="mb-8 flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">AI Mentor Dashboard</h1>
-              <p className="text-gray-600">Your personalized growth and learning journey</p>
-            </div>
-            <Button variant="outline" onClick={() => setShowMentorDashboard(false)}>
-              Back to Home
-            </Button>
-          </div>
-          <DailyTaskManager />
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50">
       <div className="container mx-auto px-4 py-8">
@@ -371,39 +346,6 @@ export default function Home() {
               className="pl-10 py-3 text-lg"
             />
           </div>
-        </div>
-
-        {/* AI Mentor Dashboard Card */}
-        <div className="mb-16">
-          <Card className="hover:shadow-xl transition-all duration-300 cursor-pointer" onClick={() => setShowMentorDashboard(true)}>
-            <CardHeader>
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                  <Brain className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <CardTitle className="text-2xl">AI Mentor Dashboard</CardTitle>
-                  <p className="text-gray-600">Track your progress, set goals, and get personalized guidance</p>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="p-4 bg-purple-50 rounded-lg">
-                  <h4 className="font-semibold text-purple-800 mb-2">Daily Tasks</h4>
-                  <p className="text-sm text-purple-700">Personalized learning tasks and reflections</p>
-                </div>
-                <div className="p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-semibold text-blue-800 mb-2">Vision Review</h4>
-                  <p className="text-sm text-blue-700">Quarterly planning and progress tracking</p>
-                </div>
-                <div className="p-4 bg-green-50 rounded-lg">
-                  <h4 className="font-semibold text-green-800 mb-2">AI Insights</h4>
-                  <p className="text-sm text-green-700">Personalized recommendations and patterns</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Interaction Types */}

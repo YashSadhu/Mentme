@@ -16,21 +16,27 @@ export async function POST(req: Request) {
     console.log("Processed message:", processedMessage)
     console.log("Mentor:", mentor.name)
 
+    // Lyzr AI API configuration from config.js
+    const API_KEY = "sk-default-pFNnvq5oSDeZx345ky9zBJpfhLruHKsO"
+    const API_URL = "https://agent-prod.studio.lyzr.ai/v3/inference/chat/"
+    const AGENT_ID = "682c2fbfc5f6c2756de27ee0"
+    const USER_ID = "newnewton09@gmail.com"
+
     // Create unique session ID
-    const sessionId = "684e3fb9e5203d8a7b653447-eozrvtq617i"
+    const sessionId = AGENT_ID + "-" + Math.random().toString(36).substring(2, 12)
 
     console.log("Making API request to Lyzr AI...")
 
     // Make request to Lyzr AI API
-    const response = await fetch("https://agent-prod.studio.lyzr.ai/v3/inference/chat/", {
+    const response = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": "sk-default-pFNnvq5oSDeZx345ky9zBJpfhLruHKsO",
+        "x-api-key": API_KEY,
       },
       body: JSON.stringify({
-        user_id: "newnewton09@gmail.com",
-        agent_id: "684e3fb9e5203d8a7b653447",
+        user_id: USER_ID,
+        agent_id: AGENT_ID,
         session_id: sessionId,
         message: processedMessage,
       }),
