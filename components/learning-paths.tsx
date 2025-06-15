@@ -101,7 +101,7 @@ const learningPaths = [
     mentor: "Leonardo da Vinci",
     color: "bg-pink-100 text-pink-700",
     icon: "🎨",
-    image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=200&fit=crop",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=200&fit=crop",
     skills: ["Creative Thinking", "Innovation", "Problem Solving", "Artistic Expression"],
     overview: "Develop your creative abilities and learn to think like a Renaissance master.",
   },
@@ -220,7 +220,7 @@ export default function LearningPaths({ onBack }: LearningPathsProps) {
             >
               <div className="relative">
                 <img
-                  src={path.image || "/placeholder.svg"}
+                  src={path.image}
                   alt={path.title}
                   className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
                 />

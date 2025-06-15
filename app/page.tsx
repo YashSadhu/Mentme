@@ -36,7 +36,7 @@ const mentorPersonas = [
     id: "naval-ravikant",
     name: "Naval Ravikant",
     field: "Entrepreneurship & Philosophy",
-    avatar: "/placeholder.svg?height=80&width=80",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
     description: "Angel investor and philosopher focused on wealth creation and happiness",
     rating: 4.9,
     sessions: 25420,
@@ -51,7 +51,7 @@ const mentorPersonas = [
     id: "swami-vivekananda",
     name: "Swami Vivekananda",
     field: "Spirituality & Personal Development",
-    avatar: "/placeholder.svg?height=80&width=80",
+    avatar: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=150&h=150&fit=crop&crop=face",
     description: "Spiritual teacher and philosopher who introduced Vedanta to the Western world",
     rating: 4.9,
     sessions: 18750,
@@ -66,7 +66,7 @@ const mentorPersonas = [
     id: "steve-jobs",
     name: "Steve Jobs",
     field: "Innovation & Design",
-    avatar: "/placeholder.svg?height=80&width=80",
+    avatar: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=150&h=150&fit=crop&crop=face",
     description: "Co-founder of Apple, master of product innovation and design thinking",
     rating: 4.8,
     sessions: 22890,
@@ -81,7 +81,7 @@ const mentorPersonas = [
     id: "marcus-aurelius",
     name: "Marcus Aurelius",
     field: "Stoic Philosophy & Leadership",
-    avatar: "/placeholder.svg?height=80&width=80",
+    avatar: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=150&h=150&fit=crop&crop=face",
     description: "Roman Emperor and Stoic philosopher, author of Meditations",
     rating: 4.9,
     sessions: 16200,
@@ -96,7 +96,7 @@ const mentorPersonas = [
     id: "marie-curie",
     name: "Marie Curie",
     field: "Science & Perseverance",
-    avatar: "/placeholder.svg?height=80&width=80",
+    avatar: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=150&h=150&fit=crop&crop=face",
     description: "Nobel Prize winner in Physics and Chemistry, pioneer in radioactivity research",
     rating: 4.8,
     sessions: 14950,
@@ -116,7 +116,7 @@ const mentorPersonas = [
     id: "leonardo-da-vinci",
     name: "Leonardo da Vinci",
     field: "Renaissance Thinking & Creativity",
-    avatar: "/placeholder.svg?height=80&width=80",
+    avatar: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=150&h=150&fit=crop&crop=face",
     description: "Renaissance polymath, artist, inventor, and scientist",
     rating: 4.9,
     sessions: 19300,
@@ -394,7 +394,7 @@ export default function HomePage() {
               <Card key={mentor.id} className="hover:shadow-xl transition-all duration-300 group">
                 <CardHeader className="text-center pb-4">
                   <img
-                    src={mentor.avatar || "/placeholder.svg"}
+                    src={mentor.avatar}
                     alt={mentor.name}
                     className="w-20 h-20 rounded-full mx-auto mb-4 object-cover group-hover:scale-105 transition-transform"
                   />

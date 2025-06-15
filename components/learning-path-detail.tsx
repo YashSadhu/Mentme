@@ -18,11 +18,11 @@ interface LearningPathDetailProps {
 }
 
 const mentorImages = {
-  "Naval Ravikant": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+  "Naval Ravikant": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
   "Andrew Huberman": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
-  "Marcus Aurelius": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+  "Marcus Aurelius": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=150&h=150&fit=crop&crop=face",
   "Swami Vivekananda": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=150&h=150&fit=crop&crop=face",
-  "Leonardo da Vinci": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=150&h=150&fit=crop&crop=face",
+  "Leonardo da Vinci": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=150&h=150&fit=crop&crop=face",
   "Steve Jobs": "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=150&h=150&fit=crop&crop=face",
 }
 
@@ -192,7 +192,7 @@ export default function LearningPathDetail({ path, onBack }: LearningPathDetailP
                   <div className="flex items-center gap-3 mb-4">
                     <img
                       src={
-                        mentorImages[path.mentor as keyof typeof mentorImages] || "/placeholder.svg?height=60&width=60"
+                        mentorImages[path.mentor as keyof typeof mentorImages] || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face"
                       }
                       alt={path.mentor}
                       className="w-15 h-15 rounded-full object-cover"

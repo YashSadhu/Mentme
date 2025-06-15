@@ -24,7 +24,7 @@ const contentData = {
         views: "2.1M",
         rating: 4.9,
         difficulty: "Beginner",
-        thumbnail: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=225&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=225&fit=crop&crop=face",
         url: "https://www.youtube.com/watch?v=1-TZqOsVCNM",
         description:
           "Complete guide to building wealth through leverage and specific knowledge. Learn the fundamental principles of wealth creation.",
@@ -71,7 +71,7 @@ const contentData = {
         views: "950K",
         rating: 4.9,
         difficulty: "Advanced",
-        thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=225&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=225&fit=crop&crop=face",
         url: "https://www.youtube.com/watch?v=pqzcCfUglws",
         description:
           "Understanding cognitive biases and mental models for better decision making in investing and life.",
@@ -275,7 +275,7 @@ const contentData = {
         views: "3.5M",
         rating: 4.9,
         difficulty: "Beginner",
-        thumbnail: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&h=225&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=225&fit=crop&crop=face",
         url: "https://www.youtube.com/watch?v=nm1TxQj9IsQ",
         description: "Science-based protocols for better sleep and recovery",
         tags: ["Sleep", "Neuroscience", "Health"],
@@ -574,7 +574,7 @@ export default function CuratedContent({ pathId, onProgressUpdate }: CuratedCont
                       )}
                       <div className="relative">
                         <img
-                          src={video.thumbnail || "/placeholder.svg"}
+                          src={video.thumbnail}
                           alt={video.title}
                           className="w-full h-32 object-cover rounded-t-lg"
                         />
@@ -662,7 +662,7 @@ export default function CuratedContent({ pathId, onProgressUpdate }: CuratedCont
                       )}
                       <div className="relative">
                         <img
-                          src={masterclass.thumbnail || "/placeholder.svg"}
+                          src={masterclass.thumbnail}
                           alt={masterclass.title}
                           className="w-full h-32 object-cover rounded-t-lg"
                         />
@@ -964,7 +964,7 @@ export default function CuratedContent({ pathId, onProgressUpdate }: CuratedCont
                       <CardContent className="p-6">
                         <div className="flex gap-4 mb-4">
                           <img
-                            src={book.cover || "/placeholder.svg"}
+                            src={book.cover}
                             alt={book.title}
                             className="w-16 h-24 object-cover rounded"
                           />
