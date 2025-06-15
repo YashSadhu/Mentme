@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART Goals & Micro-Action Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <h1 class="header__title">SMART Goals & Micro-Action Generator</h1>
+                <p class="header__subtitle">AI-Powered Goal Breakdown with Intelligent Scheduling</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-card">
+                    <div class="form-group">
+                        <label for="goalInput" class="form-label">What's your goal?</label>
+                        <textarea 
+                            id="goalInput" 
+                            class="form-control goal-input" 
+                            placeholder="Enter your goal here (e.g., 'I want to learn web development', 'Get fit and healthy', 'Start my own business')"
+                            rows="4"
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="targetDate" class="form-label">Target Completion Date</label>
+                        <input type="date" id="targetDate" class="form-control">
+                    </div>
+                    <button id="breakdownBtn" class="btn btn--primary btn--full-width">
+                        <span class="btn-text">Break Down My Goal</span>
+                        <div class="loading-spinner hidden">
+                            <div class="spinner"></div>
+                        </div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section hidden">
+                <!-- SMART Goals Breakdown -->
+                <div class="smart-section">
+                    <h2 class="section-title">SMART Goals Breakdown</h2>
+                    <div class="smart-grid" id="smartGrid">
+                        <!-- SMART cards will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Micro-Actions Section -->
+                <div class="micro-actions-section">
+                    <h2 class="section-title">Micro-Actions Plan</h2>
+                    <div class="actions-container">
+                        <div class="actions-header">
+                            <p class="actions-subtitle">Your next smallest steps to success</p>
+                            <div class="progress-overview">
+                                <span class="progress-text">Progress: <span id="progressText">0/0 completed</span></span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progressFill"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions-list" id="actionsList">
+                            <!-- Actions will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Section -->
+                <div class="timeline-section">
+                    <h2 class="section-title">Timeline & Schedule</h2>
+                    <div class="timeline-container">
+                        <div class="timeline-controls">
+                            <button class="btn btn--outline timeline-btn active" data-view="week">Week View</button>
+                            <button class="btn btn--outline timeline-btn" data-view="month">Month View</button>
+                        </div>
+                        <div class="timeline-content" id="timelineContent">
+                            <!-- Timeline will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Section -->
+                <div class="export-section">
+                    <h2 class="section-title">Export & Share</h2>
+                    <div class="export-buttons">
+                        <button class="btn btn--secondary" id="exportCalendarBtn">
+                            📅 Export to Calendar
+                        </button>
+                        <button class="btn btn--secondary" id="printBtn">
+                            🖨️ Print Plan
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Oops! Something went wrong</h3>
+                <button class="modal-close" id="closeErrorModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="errorMessage">There was an error processing your request. Please try again.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--primary" id="closeErrorBtn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
