@@ -220,7 +220,7 @@ export default function HomePage() {
           <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
             <Brain className="w-6 h-6 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Loading Timeless Mentors...</h1>
+          <h1 className="text-h4 font-serif text-gray-900">Loading Timeless Mentors...</h1>
         </div>
       </div>
     )
@@ -304,18 +304,18 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-12">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <Brain className="w-6 h-6 text-white" />
+            <div className="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+              <Brain className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Timeless Mentors</h1>
-              <p className="text-gray-600">Learn from history's greatest minds</p>
+              <h1 className="text-h2 font-serif elegant-header text-gray-900">Timeless Mentors</h1>
+              <p className="text-body text-gray-600">Learn from history's greatest minds</p>
             </div>
           </div>
           {isAuthenticated && (
-            <Button variant="outline" onClick={() => setCurrentView("profile")}>
+            <Button variant="outline" onClick={() => setCurrentView("profile")} className="btn-text">
               <User className="w-4 h-4 mr-2" />
               Profile
             </Button>
@@ -323,54 +323,54 @@ export default function HomePage() {
         </div>
 
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-6 py-3 rounded-full text-body-sm font-medium mb-8">
             <Zap className="w-4 h-4" />
             AI-Powered Wisdom from History's Greatest Minds
           </div>
-          <h2 className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
+          <h2 className="text-hero font-serif elegant-header text-gray-900 mb-8 leading-tight">
             Your Personal <span className="text-purple-600">Mentorship</span> Journey
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          <p className="text-body-lg text-gray-600 max-w-4xl mx-auto mb-10 leading-relaxed">
             Connect with AI mentors fine-tuned on the wisdom of Naval Ravikant, Swami Vivekananda, Steve Jobs, and other
             legendary figures. Get personalized guidance tailored to your unique challenges and goals.
           </p>
 
           {/* Search Bar */}
-          <div className="max-w-md mx-auto relative mb-8">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <div className="max-w-lg mx-auto relative mb-10">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <Input
               placeholder="Search mentors or topics..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 py-3 text-lg"
+              className="pl-12 py-4 text-body rounded-xl border-2 border-gray-200 focus:border-purple-400 shadow-sm"
             />
           </div>
         </div>
 
         {/* Interaction Types */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Choose Your Mentorship Style</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mb-20">
+          <h3 className="text-h2 font-serif elegant-header text-gray-900 mb-10 text-center">Choose Your Mentorship Style</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {interactionTypes.map((type) => (
               <Card
                 key={type.id}
-                className="hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                className="hover:shadow-xl transition-all duration-300 cursor-pointer group border-0 shadow-md"
                 onClick={() => handleInteractionSelect(type.id)}
               >
-                <CardHeader className="text-center">
+                <CardHeader className="text-center pb-4">
                   <div
-                    className={`w-16 h-16 rounded-lg ${type.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}
+                    className={`w-20 h-20 rounded-xl ${type.color} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-sm`}
                   >
-                    <type.icon className="w-8 h-8" />
+                    <type.icon className="w-9 h-9" />
                   </div>
-                  <CardTitle className="text-xl">{type.name}</CardTitle>
-                  <Badge variant="outline" className="mt-2">
+                  <CardTitle className="text-h5 font-serif mentor-name">{type.name}</CardTitle>
+                  <Badge variant="outline" className="mt-3 text-caption font-medium">
                     {type.duration}
                   </Badge>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 text-center">{type.description}</p>
+                <CardContent className="pt-0">
+                  <p className="text-body text-gray-600 text-center leading-relaxed">{type.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -378,58 +378,58 @@ export default function HomePage() {
         </div>
 
         {/* Featured Mentors */}
-        <div className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-6 h-6 text-purple-600" />
-              <h3 className="text-3xl font-bold text-gray-900">Featured Mentors</h3>
+        <div className="mb-20">
+          <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center gap-3">
+              <TrendingUp className="w-7 h-7 text-purple-600" />
+              <h3 className="text-h2 font-serif elegant-header text-gray-900">Featured Mentors</h3>
             </div>
-            <Button variant="outline" onClick={() => setCurrentView("mentor-browser")}>
+            <Button variant="outline" onClick={() => setCurrentView("mentor-browser")} className="btn-text">
               View All Mentors
             </Button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {mentorPersonas.slice(0, 6).map((mentor) => (
-              <Card key={mentor.id} className="hover:shadow-xl transition-all duration-300 group">
-                <CardHeader className="text-center pb-4">
+              <Card key={mentor.id} className="hover:shadow-xl transition-all duration-300 group border-0 shadow-md">
+                <CardHeader className="text-center pb-6">
                   <img
                     src={mentor.avatar}
                     alt={mentor.name}
-                    className="w-20 h-20 rounded-full mx-auto mb-4 object-cover group-hover:scale-105 transition-transform"
+                    className="w-24 h-24 rounded-full mx-auto mb-6 object-cover group-hover:scale-105 transition-transform shadow-lg"
                   />
-                  <CardTitle className="text-lg">{mentor.name}</CardTitle>
-                  <Badge variant="secondary" className="mt-2 text-xs">
+                  <CardTitle className="text-h5 font-serif mentor-name">{mentor.name}</CardTitle>
+                  <Badge variant="secondary" className="mt-3 text-caption">
                     {mentor.field}
                   </Badge>
                 </CardHeader>
-                <CardContent>
-                  <div className="mb-4">
-                    <Quote className="w-4 h-4 text-gray-400 mb-2" />
-                    <p className="text-sm text-gray-600 italic">"{mentor.quote}"</p>
+                <CardContent className="pt-0">
+                  <div className="mb-6">
+                    <Quote className="w-5 h-5 text-gray-400 mb-3" />
+                    <p className="quote-text text-gray-700">"{mentor.quote}"</p>
                   </div>
 
-                  <div className="flex flex-wrap gap-1 mb-4">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {mentor.expertise.slice(0, 3).map((skill) => (
-                      <Badge key={skill} variant="outline" className="text-xs">
+                      <Badge key={skill} variant="outline" className="text-caption">
                         {skill}
                       </Badge>
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between mb-4 text-sm text-gray-500">
-                    <div className="flex items-center gap-1">
+                  <div className="flex items-center justify-between mb-6 text-body-sm text-gray-500">
+                    <div className="flex items-center gap-2">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span>{mentor.rating}</span>
+                      <span className="font-medium">{mentor.rating}</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       <MessageCircle className="w-4 h-4" />
                       <span>{mentor.sessions.toLocaleString()}</span>
                     </div>
                   </div>
                   <Button
                     onClick={() => handleMentorSelect(mentor, "chat")}
-                    className="w-full group-hover:bg-purple-700 transition-colors"
+                    className="w-full group-hover:bg-purple-700 transition-colors btn-text-lg"
                   >
                     Start Session
                   </Button>
@@ -440,71 +440,71 @@ export default function HomePage() {
         </div>
 
         {/* Platform Features */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <Card className="text-center hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <User className="w-6 h-6 text-blue-600" />
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+          <Card className="text-center hover:shadow-lg transition-shadow border-0 shadow-md">
+            <CardContent className="p-8">
+              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-6">
+                <User className="w-8 h-8 text-blue-600" />
               </div>
-              <h4 className="font-semibold mb-2">Personal Profiles</h4>
-              <p className="text-sm text-gray-600">Track progress and mentorship history</p>
+              <h4 className="text-h6 font-serif mentor-name mb-3">Personal Profiles</h4>
+              <p className="text-body-sm text-gray-600 leading-relaxed">Track progress and mentorship history</p>
             </CardContent>
           </Card>
 
-          <Card className="text-center hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Brain className="w-6 h-6 text-purple-600" />
+          <Card className="text-center hover:shadow-lg transition-shadow border-0 shadow-md">
+            <CardContent className="p-8">
+              <div className="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-6">
+                <Brain className="w-8 h-8 text-purple-600" />
               </div>
-              <h4 className="font-semibold mb-2">Fine-tuned AI</h4>
-              <p className="text-sm text-gray-600">Models trained on mentor-specific content</p>
+              <h4 className="text-h6 font-serif mentor-name mb-3">Fine-tuned AI</h4>
+              <p className="text-body-sm text-gray-600 leading-relaxed">Models trained on mentor-specific content</p>
             </CardContent>
           </Card>
 
-          <Card className="text-center hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="w-6 h-6 text-green-600" />
+          <Card className="text-center hover:shadow-lg transition-shadow border-0 shadow-md">
+            <CardContent className="p-8">
+              <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-6">
+                <Target className="w-8 h-8 text-green-600" />
               </div>
-              <h4 className="font-semibold mb-2">Diverse Interactions</h4>
-              <p className="text-sm text-gray-600">Multiple session types for different needs</p>
+              <h4 className="text-h6 font-serif mentor-name mb-3">Diverse Interactions</h4>
+              <p className="text-body-sm text-gray-600 leading-relaxed">Multiple session types for different needs</p>
             </CardContent>
           </Card>
 
-          <Card className="text-center hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <PenTool className="w-6 h-6 text-orange-600" />
+          <Card className="text-center hover:shadow-lg transition-shadow border-0 shadow-md">
+            <CardContent className="p-8">
+              <div className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-6">
+                <PenTool className="w-8 h-8 text-orange-600" />
               </div>
-              <h4 className="font-semibold mb-2">Journal & Reflect</h4>
-              <p className="text-sm text-gray-600">Document insights and get feedback</p>
+              <h4 className="text-h6 font-serif mentor-name mb-3">Journal & Reflect</h4>
+              <p className="text-body-sm text-gray-600 leading-relaxed">Document insights and get feedback</p>
             </CardContent>
           </Card>
         </div>
 
         {/* CTA Section */}
-        <div className="text-center bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl p-12">
-          <h3 className="text-4xl font-bold mb-4">Begin Your Mentorship Journey</h3>
-          <p className="text-xl mb-8 opacity-90">
+        <div className="text-center bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-3xl p-16 shadow-2xl">
+          <h3 className="text-h1 font-serif elegant-header mb-6">Begin Your Mentorship Journey</h3>
+          <p className="text-body-lg mb-10 opacity-90 max-w-2xl mx-auto leading-relaxed">
             Join thousands learning from AI mentors trained on the wisdom of history's greatest minds
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button
               size="lg"
               variant="secondary"
-              className="text-lg px-8 py-4"
+              className="text-body-lg px-10 py-4 rounded-xl"
               onClick={() => handleInteractionSelect("demo-chat")}
             >
-              <Zap className="w-5 h-5 mr-2" />
+              <Zap className="w-5 h-5 mr-3" />
               Try Demo
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-purple-600"
+              className="text-body-lg px-10 py-4 border-white text-white hover:bg-white hover:text-purple-600 rounded-xl"
               onClick={() => setCurrentView("mentor-browser")}
             >
-              <Users className="w-5 h-5 mr-2" />
+              <Users className="w-5 h-5 mr-3" />
               Choose Your Mentor
             </Button>
           </div>

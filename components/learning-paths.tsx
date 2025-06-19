@@ -151,28 +151,28 @@ export default function LearningPaths({ onBack }: LearningPathsProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-4 py-4">
+      <div className="bg-white border-b border-gray-200 px-4 py-6 shadow-sm">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 mb-4">
-            <Button variant="ghost" size="sm" onClick={onBack}>
+          <div className="flex items-center gap-4 mb-6">
+            <Button variant="ghost" size="sm" onClick={onBack} className="btn-text">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>
             <div>
-              <h1 className="text-2xl font-bold">Learning Paths</h1>
-              <p className="text-gray-600">Structured journeys to master life's essential skills</p>
+              <h1 className="text-h2 font-serif elegant-header">Learning Paths</h1>
+              <p className="text-body text-gray-600 mt-1">Structured journeys to master life's essential skills</p>
             </div>
           </div>
 
           {/* Search and Filters */}
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <Input
                 placeholder="Search learning paths..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-12 py-3 text-body rounded-xl border-2 border-gray-200 focus:border-purple-400"
               />
             </div>
 
@@ -183,6 +183,7 @@ export default function LearningPaths({ onBack }: LearningPathsProps) {
                   variant={selectedCategory === category ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedCategory(category)}
+                  className="btn-text rounded-lg"
                 >
                   {category}
                 </Button>
@@ -196,6 +197,7 @@ export default function LearningPaths({ onBack }: LearningPathsProps) {
                   variant={selectedDifficulty === difficulty ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedDifficulty(difficulty)}
+                  className="btn-text rounded-lg"
                 >
                   {difficulty}
                 </Button>
@@ -207,66 +209,66 @@ export default function LearningPaths({ onBack }: LearningPathsProps) {
 
       {/* Learning Paths Grid */}
       <div className="max-w-6xl mx-auto p-6">
-        <div className="mb-4 text-sm text-gray-600">
+        <div className="mb-6 text-body-sm text-gray-600">
           Showing {filteredPaths.length} learning path{filteredPaths.length !== 1 ? "s" : ""}
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPaths.map((path) => (
             <Card
               key={path.id}
-              className="hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden"
+              className="hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden border-0 shadow-md"
               onClick={() => setSelectedPath(path)}
             >
               <div className="relative">
                 <img
                   src={path.image}
                   alt={path.title}
-                  className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute top-2 right-2">
-                  <Badge variant="outline" className="bg-white">
+                <div className="absolute top-3 right-3">
+                  <Badge variant="outline" className="bg-white text-caption font-medium">
                     {path.difficulty}
                   </Badge>
                 </div>
-                <div className="absolute bottom-2 left-2">
+                <div className="absolute bottom-3 left-3">
                   <div
-                    className={`w-10 h-10 rounded-lg ${path.color} flex items-center justify-center text-xl bg-white bg-opacity-90`}
+                    className={`w-12 h-12 rounded-xl ${path.color} flex items-center justify-center text-xl bg-white bg-opacity-90 shadow-sm`}
                   >
                     {path.icon}
                   </div>
                 </div>
               </div>
 
-              <CardHeader>
-                <CardTitle className="text-lg group-hover:text-purple-600 transition-colors">{path.title}</CardTitle>
-                <p className="text-sm text-gray-600">{path.description}</p>
+              <CardHeader className="pb-4">
+                <CardTitle className="text-h6 font-serif mentor-name group-hover:text-purple-600 transition-colors">{path.title}</CardTitle>
+                <p className="text-body-sm text-gray-600 leading-relaxed">{path.description}</p>
               </CardHeader>
 
-              <CardContent>
+              <CardContent className="pt-0">
                 {/* Progress */}
-                <div className="mb-4">
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>Progress</span>
-                    <span>{Math.round((path.completedModules / path.modules) * 100)}%</span>
+                <div className="mb-6">
+                  <div className="flex justify-between text-body-sm mb-2">
+                    <span className="font-medium">Progress</span>
+                    <span className="font-medium">{Math.round((path.completedModules / path.modules) * 100)}%</span>
                   </div>
                   <Progress value={(path.completedModules / path.modules) * 100} className="h-2" />
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-caption text-gray-500 mt-2">
                     {path.completedModules} of {path.modules} modules completed
                   </p>
                 </div>
 
                 {/* Skills */}
-                <div className="mb-4">
-                  <p className="text-xs font-medium text-gray-500 mb-2">Skills you'll learn:</p>
+                <div className="mb-6">
+                  <p className="text-caption font-medium text-gray-500 mb-3">Skills you'll learn:</p>
                   <div className="flex flex-wrap gap-1">
                     {path.skills.slice(0, 3).map((skill) => (
-                      <Badge key={skill} variant="secondary" className="text-xs">
+                      <Badge key={skill} variant="secondary" className="text-caption">
                         {skill}
                       </Badge>
                     ))}
                     {path.skills.length > 3 && (
-                      <Badge variant="secondary" className="text-xs">
+                      <Badge variant="secondary" className="text-caption">
                         +{path.skills.length - 3}
                       </Badge>
                     )}
@@ -274,28 +276,28 @@ export default function LearningPaths({ onBack }: LearningPathsProps) {
                 </div>
 
                 {/* Stats */}
-                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                  <div className="flex items-center gap-1">
+                <div className="flex items-center justify-between text-body-sm text-gray-500 mb-6">
+                  <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />
                     <span>{path.duration}</span>
                   </div>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <Users className="w-4 h-4" />
                     <span>{path.participants.toLocaleString()}</span>
                   </div>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span>{path.rating}</span>
+                    <span className="font-medium">{path.rating}</span>
                   </div>
                 </div>
 
                 {/* Mentor */}
                 <div className="flex items-center justify-between">
-                  <div className="text-sm">
+                  <div className="text-body-sm">
                     <span className="text-gray-500">Mentor: </span>
-                    <span className="font-medium">{path.mentor}</span>
+                    <span className="font-serif mentor-name font-medium">{path.mentor}</span>
                   </div>
-                  <Button size="sm" className="group-hover:bg-purple-700 transition-colors">
+                  <Button size="sm" className="group-hover:bg-purple-700 transition-colors btn-text rounded-lg">
                     {path.completedModules > 0 ? "Continue" : "Start Path"}
                   </Button>
                 </div>
@@ -305,12 +307,12 @@ export default function LearningPaths({ onBack }: LearningPathsProps) {
         </div>
 
         {filteredPaths.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-400 mb-4">
-              <BookOpen className="w-12 h-12 mx-auto" />
+          <div className="text-center py-16">
+            <div className="text-gray-400 mb-6">
+              <BookOpen className="w-16 h-16 mx-auto" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-600 mb-2">No learning paths found</h3>
-            <p className="text-gray-500">Try adjusting your search or filter criteria</p>
+            <h3 className="text-h5 font-serif mentor-name text-gray-600 mb-3">No learning paths found</h3>
+            <p className="text-body text-gray-500">Try adjusting your search or filter criteria</p>
           </div>
         )}
       </div>

@@ -185,33 +185,33 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-4 py-4">
+      <div className="bg-white border-b border-gray-200 px-4 py-4 shadow-sm">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" onClick={onBack}>
+            <Button variant="ghost" size="sm" onClick={onBack} className="btn-text">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <img
                 src={mentor.avatar || "/placeholder.svg"}
                 alt={mentor.name}
-                className="w-10 h-10 rounded-full object-cover"
+                className="w-12 h-12 rounded-full object-cover shadow-md"
               />
               <div>
-                <h1 className="font-semibold text-lg">{mentor.name}</h1>
-                <Badge variant="secondary" className="text-xs">
+                <h1 className="text-h6 font-serif mentor-name">{mentor.name}</h1>
+                <Badge variant="secondary" className="text-caption">
                   {mentor.field}
                 </Badge>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" onClick={() => setShowFineTuning(true)}>
+          <div className="flex items-center gap-3">
+            <Button variant="outline" size="sm" onClick={() => setShowFineTuning(true)} className="btn-text">
               <Settings className="w-4 h-4 mr-2" />
               Fine-tune
             </Button>
-            <Button variant="outline" size="sm" onClick={onProfile}>
+            <Button variant="outline" size="sm" onClick={onProfile} className="btn-text">
               <User className="w-4 h-4 mr-2" />
               Profile
             </Button>
@@ -220,14 +220,14 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
       </div>
 
       {/* Mentor Info Panel */}
-      <div className="bg-blue-50 border-b border-blue-200 px-4 py-3">
+      <div className="bg-blue-50 border-b border-blue-200 px-4 py-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-start gap-4">
-            <Brain className="w-5 h-5 text-blue-600 mt-1" />
+            <Brain className="w-6 h-6 text-blue-600 mt-1" />
             <div>
-              <p className="text-sm font-medium text-blue-900">Mental Models:</p>
-              <p className="text-sm text-blue-700">{mentor.mentalModels.join(" • ")}</p>
-              <p className="text-xs text-blue-600 mt-1">Communication: {mentor.communicationStyle}</p>
+              <p className="text-body-sm font-medium text-blue-900">Mental Models:</p>
+              <p className="text-body-sm text-blue-700">{mentor.mentalModels.join(" • ")}</p>
+              <p className="text-caption text-blue-600 mt-1">Communication: {mentor.communicationStyle}</p>
             </div>
           </div>
         </div>
@@ -235,14 +235,14 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
 
       {/* Chat Area */}
       <div className="max-w-4xl mx-auto p-4">
-        <Card className="h-[calc(100vh-280px)] flex flex-col">
-          <CardHeader className="border-b">
+        <Card className="h-[calc(100vh-280px)] flex flex-col shadow-lg border-0">
+          <CardHeader className="border-b bg-gray-50">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-xl">Mentorship Session</CardTitle>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
+              <CardTitle className="text-h5 font-serif mentor-name">Mentorship Session</CardTitle>
+              <div className="flex items-center gap-3 text-body-sm text-gray-500">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                <span>{mentor.rating}</span>
-                <Badge variant="outline" className="ml-2">
+                <span className="font-medium">{mentor.rating}</span>
+                <Badge variant="outline" className="ml-2 text-caption">
                   Live AI Connection
                 </Badge>
               </div>
@@ -250,16 +250,18 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
           </CardHeader>
 
           <CardContent className="flex-1 overflow-y-auto p-6">
-            <div className="space-y-4">
+            <div className="space-y-6">
               {messages.map((message) => (
                 <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
-                    className={`max-w-[80%] p-4 rounded-lg ${
-                      message.role === "user" ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-900"
+                    className={`max-w-[80%] p-5 rounded-2xl ${
+                      message.role === "user" 
+                        ? "bg-purple-600 text-white" 
+                        : "bg-gray-100 text-gray-900 shadow-sm"
                     }`}
                   >
                     <div
-                      className="whitespace-pre-wrap"
+                      className={`${message.role === "assistant" ? "reading-content" : "text-body"} whitespace-pre-wrap`}
                       dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
                     />
                   </div>
@@ -268,8 +270,8 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
 
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-gray-100 text-gray-900 p-4 rounded-lg">
-                    <div className="flex items-center gap-2">
+                  <div className="bg-gray-100 text-gray-900 p-5 rounded-2xl shadow-sm">
+                    <div className="flex items-center gap-3">
                       <div className="flex gap-1">
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                         <div
@@ -281,7 +283,7 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
                           style={{ animationDelay: "0.2s" }}
                         ></div>
                       </div>
-                      <span className="text-sm text-gray-500">{mentor.name} is thinking...</span>
+                      <span className="text-body-sm text-gray-500 font-serif">{mentor.name} is thinking...</span>
                     </div>
                   </div>
                 </div>
@@ -289,20 +291,24 @@ export default function ChatInterface({ mentor, onBack, onProfile }: ChatInterfa
             </div>
           </CardContent>
 
-          <div className="border-t p-4">
-            <form onSubmit={handleSubmit} className="flex gap-2">
+          <div className="border-t p-6 bg-gray-50">
+            <form onSubmit={handleSubmit} className="flex gap-3">
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={`Share your thoughts with ${mentor.name}...`}
-                className="flex-1"
+                className="flex-1 text-body py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400"
                 disabled={isLoading}
               />
-              <Button type="submit" disabled={isLoading || !input.trim()}>
+              <Button 
+                type="submit" 
+                disabled={isLoading || !input.trim()}
+                className="px-6 py-3 rounded-xl btn-text"
+              >
                 <Send className="w-4 h-4" />
               </Button>
             </form>
-            <p className="text-xs text-gray-500 mt-2 text-center">
+            <p className="text-caption text-gray-500 mt-3 text-center">
               Powered by Lyzr AI • Real-time responses from {mentor.name}
             </p>
           </div>
